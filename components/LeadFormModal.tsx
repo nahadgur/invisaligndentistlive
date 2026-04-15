@@ -38,14 +38,17 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
     setIsSubmitting(true);
     try {
       const form = e.currentTarget;
-      const fullName = (form.elements[0] as HTMLInputElement).value;
-      const email = (form.elements[1] as HTMLInputElement).value;
-      const location = (form.elements[2] as HTMLInputElement).value;
+      const fullName = (form.elements.namedItem('fullName') as HTMLInputElement).value;
+      const email    = (form.elements.namedItem('email') as HTMLInputElement).value;
+      const phone    = (form.elements.namedItem('phone') as HTMLInputElement).value;
+      const location = (form.elements.namedItem('location') as HTMLInputElement).value;
 
       const payload = {
         fullName,
         email,
+        phone,
         location,
+        treatment: '',
         page: window.location.href,
         source: 'Invisalign Dentists',
       };
@@ -116,9 +119,10 @@ export function LeadFormModal({ isOpen, onClose }: LeadFormModalProps) {
               </div>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input required type="text" placeholder="Full name" className={inputClass} />
-                <input required type="email" placeholder="Email address" className={inputClass} />
-                <input required type="text" placeholder="Your city / location" className={inputClass} />
+                <input required name="fullName" type="text" placeholder="Full name" className={inputClass} />
+                <input required name="email" type="email" placeholder="Email address" className={inputClass} />
+                <input required name="phone" type="tel" placeholder="Phone number" className={inputClass} />
+                <input required name="location" type="text" placeholder="Your city / location" className={inputClass} />
 
                 <button
                   type="submit"
