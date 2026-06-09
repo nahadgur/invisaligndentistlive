@@ -77,7 +77,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
                 <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">Available Treatments in {cityName}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {services.map(service => (
-                    <Link key={service.id} href={`/services/${service.slug}/${params.city}/`} className="block group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+                    <Link key={service.id} href={`/services/${service.slug}/`} className="block group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
                       <div className="h-36 overflow-hidden">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />

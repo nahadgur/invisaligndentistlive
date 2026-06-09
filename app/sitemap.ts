@@ -34,11 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url(`/location/${toSlug(city)}`, 0.7),
   );
 
-  const serviceLocationPages: MetadataRoute.Sitemap = services.flatMap(service =>
-    allCities.map(city =>
-      url(`/services/${service.slug}/${toSlug(city)}`, 0.9),
-    ),
-  );
-
-  return [...staticPages, ...servicePages, ...locationPages, ...serviceLocationPages];
+  return [...staticPages, ...servicePages, ...locationPages];
 }

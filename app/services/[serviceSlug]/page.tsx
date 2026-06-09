@@ -420,7 +420,7 @@ export default function ServicePage({ params }: { params: { serviceSlug: string 
                       {cities.map(city => (
                         <Link
                           key={city}
-                          href={`/services/${service.slug}/${toSlug(city)}/`}
+                          href={`/location/${toSlug(city)}/`}
                           className="group flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg hover:bg-brand-50 transition-all border border-gray-100 hover:border-brand-200"
                         >
                           <MapPin className="w-3 h-3 text-brand-400 flex-shrink-0" />
