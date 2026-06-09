@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
+import { ConsentBanner } from "@/components/ConsentBanner";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -62,14 +63,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       </head>
       <body className="min-h-screen flex flex-col">
+        {/* GA4 — consent denied by default (UK PECR); ConsentBanner upgrades to granted on opt-in */}
+        <Script id="ga-consent-default" strategy="beforeInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+          });`}
+        </Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-2DYPJ7RCB8" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-2DYPJ7RCB8');`}
+          gtag('config', 'G-2DYPJ7RCB8', { 'anonymize_ip': true });`}
         </Script>
         {children}
+        <ConsentBanner />
       </body>
     </html>
   );

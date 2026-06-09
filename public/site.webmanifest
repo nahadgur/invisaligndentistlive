@@ -1,6 +1,6 @@
 {
-  "name": "Garden Rooms London",
-  "short_name": "Garden Rooms London",
+  "name": "Invisalign Dentists",
+  "short_name": "Invisalign Dentists",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#0B5D3E",
+  "theme_color": "#0284c7",
   "background_color": "#ffffff",
   "display": "standalone"
 }
