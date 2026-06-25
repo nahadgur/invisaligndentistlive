@@ -8,6 +8,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { LeadFormModal } from '@/components/LeadFormModal';
+import { FloatingPathsBackground } from '@/components/FloatingPathsBackground';
 
 export default function ServicesIndexPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,23 +21,29 @@ export default function ServicesIndexPage() {
         <Hero
           title="Elite Invisalign Treatments"
           subtitle="Customised clear aligner solutions for every clinical challenge, from complex bite issues to lifestyle-focused adult treatment."
-          image="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2000&auto=format&fit=crop"
+          image="/images/services-candidate-invisalign.jpeg"
           showCta={false}
           showTrust={false}
         />
-        <section className="section-padding">
+        <FloatingPathsBackground position={1} className="bg-[#f4efeb] py-20 md:py-28">
           <div className="container-width">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <h2 className="text-4xl font-medium text-slate-800 md:text-6xl">Clear Aligner Treatment Paths</h2>
+              <p className="mt-4 text-sm leading-7 text-slate-600">
+                Choose the concern that best matches your smile. Each path connects you with experienced providers who routinely plan these cases.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {services.map(service => (
-                <Link key={service.id} href={`/services/${service.slug}/`} className="group flex gap-6 p-6 bg-white rounded-2xl border border-gray-100 hover:border-brand-300 hover:shadow-lg transition-all">
-                  <div className="w-32 h-32 rounded-xl overflow-hidden flex-shrink-0">
+                <Link key={service.id} href={`/services/${service.slug}/`} className="group flex gap-6 border border-slate-200 bg-white/88 p-6 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:border-cyan-200 hover:bg-white hover:shadow-xl hover:shadow-slate-950/8">
+                  <div className="h-32 w-32 flex-shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                   </div>
                   <div className="flex flex-col">
-                    <h2 className="text-xl font-display font-bold text-gray-900 group-hover:text-brand-600 mb-2">{service.title}</h2>
-                    <p className="text-sm text-gray-600 mb-4 flex-grow">{service.description}</p>
-                    <span className="text-brand-600 font-medium text-sm flex items-center">
+                    <h2 className="mb-2 text-2xl font-medium text-slate-800 group-hover:text-cyan-800">{service.title}</h2>
+                    <p className="mb-4 flex-grow text-sm leading-6 text-slate-600">{service.description}</p>
+                    <span className="flex items-center text-sm font-bold text-slate-600 group-hover:text-cyan-800">
                       View treatment <ArrowRight className="w-4 h-4 ml-1" />
                     </span>
                   </div>
@@ -44,7 +51,7 @@ export default function ServicesIndexPage() {
               ))}
             </div>
           </div>
-        </section>
+        </FloatingPathsBackground>
       </main>
       <Footer />
     </>

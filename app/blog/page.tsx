@@ -8,6 +8,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { LeadFormModal } from '@/components/LeadFormModal';
+import { FloatingPathsBackground } from '@/components/FloatingPathsBackground';
 
 interface Article {
   'Article Title': string;
@@ -124,7 +125,7 @@ export default function BlogPage() {
           showTrust={false}
         />
 
-        <section className="section-padding">
+        <FloatingPathsBackground position={1} className="bg-[#f6fbff] py-16 md:py-20">
           <div className="container-width">
             {/* Search */}
             <div className="max-w-xl mx-auto mb-12">
@@ -135,7 +136,7 @@ export default function BlogPage() {
                   placeholder="Search articles by topic..."
                   value={blogSearchQuery}
                   onChange={(e) => { setBlogSearchQuery(e.target.value); setBlogPage(1); }}
-                  className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition"
+                  className="w-full border border-slate-200 bg-white/90 py-4 pl-12 pr-4 text-sm text-slate-900 shadow-sm backdrop-blur transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 />
               </div>
             </div>
@@ -143,7 +144,7 @@ export default function BlogPage() {
             {/* Article Grid — Garden Rooms editorial card pattern */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paginatedPosts.map(post => (
-                <article key={post.Slug} className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col">
+                <article key={post.Slug} className="group flex flex-col overflow-hidden border border-slate-200 bg-white/90 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:bg-white hover:shadow-xl hover:shadow-slate-950/8">
                   <Link href={`/blog/${post.Slug}/`} className="block h-48 overflow-hidden relative bg-gray-100">
                     {post.featuredImage ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -153,17 +154,17 @@ export default function BlogPage() {
                         <span className="text-4xl opacity-30">📝</span>
                       </div>
                     )}
-                    <div className="absolute top-4 left-4 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <div className="absolute top-4 left-4 bg-slate-900/80 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur">
                       {post.wp_category}
                     </div>
                   </Link>
                   <div className="p-6 flex flex-col flex-grow">
                     <Link href={`/blog/${post.Slug}/`}>
-                      <h2 className="text-xl font-display font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">{post['Article Title']}</h2>
+                      <h2 className="text-xl font-display font-medium text-slate-900 mb-2 group-hover:text-cyan-800 transition-colors">{post['Article Title']}</h2>
                     </Link>
-                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow">{getExcerpt(post['Article Content'])}</p>
+                    <p className="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow">{getExcerpt(post['Article Content'])}</p>
                     <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                      <Link href={`/blog/${post.Slug}/`} className="text-brand-600 font-medium text-sm flex items-center hover:underline">
+                      <Link href={`/blog/${post.Slug}/`} className="text-cyan-800 font-bold text-sm flex items-center hover:underline">
                         Read article <ArrowRight className="w-4 h-4 ml-1" />
                       </Link>
                       <span className="text-xs text-gray-400">
@@ -196,7 +197,7 @@ export default function BlogPage() {
               </div>
             )}
           </div>
-        </section>
+        </FloatingPathsBackground>
       </main>
       <Footer />
     </>

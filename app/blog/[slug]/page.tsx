@@ -9,6 +9,7 @@ import { useParams } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { LeadFormModal } from '@/components/LeadFormModal';
+import { FloatingPathsBackground } from '@/components/FloatingPathsBackground';
 
 /* =======================
    TYPES
@@ -329,9 +330,11 @@ export default function ArticlePage() {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-white text-gray-900">
+      <div className="relative min-h-screen bg-[#f6fbff] text-gray-900">
         <Header onOpenModal={() => setIsModalOpen(true)} />
-        <div className="pt-32 px-6 max-w-5xl mx-auto">
+        {/* Dark brand band keeps the translucent navbar legible over the light page bg */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-600 via-brand-500 to-[#f6fbff]" />
+        <div className="relative pt-36 px-6 max-w-5xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900">Article not found</h1>
           <Link href="/blog" className="text-brand-600 underline mt-6 inline-block">
             Back to blog
@@ -347,9 +350,12 @@ export default function ArticlePage() {
   ======================= */
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="relative min-h-screen bg-[#f6fbff] text-gray-900">
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Header onOpenModal={() => setIsModalOpen(true)} />
+
+      {/* Dark brand band keeps the translucent navbar legible over the light page bg */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-600 via-brand-500 to-[#f6fbff]" />
 
       {showScrollTop && (
         <button
@@ -360,12 +366,13 @@ export default function ArticlePage() {
         </button>
       )}
 
-      <div className="pt-32 px-6 max-w-5xl mx-auto">
-        <Link href="/blog" className="text-brand-600 uppercase text-xs font-bold">
+      <FloatingPathsBackground position={1} className="px-6 pb-20 pt-36">
+      <div className="max-w-5xl mx-auto">
+        <Link href="/blog" className="text-cyan-800 hover:text-cyan-600 transition-colors text-sm font-bold">
           ← Back to blog
         </Link>
 
-        <div className="mt-10 rounded-2xl overflow-hidden border border-gray-200">
+        <div className="mt-10 overflow-hidden border border-slate-200 bg-white/92 shadow-2xl shadow-slate-950/8 backdrop-blur">
           <div className="relative h-[420px] md:h-[520px]">
             {article.featuredImage && (
               // eslint-disable-next-line @next/next/no-img-element
@@ -398,7 +405,7 @@ export default function ArticlePage() {
               '[&_ul]:my-6 [&_ul]:pl-7 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:space-y-3 [&_ul]:text-gray-600 [&_ul]:font-medium',
               '[&_ol]:my-6 [&_ol]:pl-7 [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:space-y-3 [&_ol]:text-gray-600 [&_ol]:font-medium',
               '[&_li]:leading-relaxed [&_li]:pl-1 [&_li]:marker:text-brand-600',
-              '[&_blockquote]:my-8 [&_blockquote]:rounded-3xl [&_blockquote]:border [&_blockquote]:border-gray-200 [&_blockquote]:bg-white/5 [&_blockquote]:p-6 [&_blockquote]:text-gray-900 [&_blockquote]:font-medium',
+              '[&_blockquote]:my-8 [&_blockquote]:rounded-3xl [&_blockquote]:border [&_blockquote]:border-cyan-100 [&_blockquote]:bg-cyan-50/70 [&_blockquote]:p-6 [&_blockquote]:text-gray-900 [&_blockquote]:font-medium',
               '[&_blockquote_p]:mb-0',
               '[&_hr]:my-10 [&_hr]:border-gray-200',
               '[&_img]:w-full [&_img]:h-auto [&_img]:rounded-3xl [&_img]:border [&_img]:border-gray-200 [&_img]:shadow-2xl [&_img]:my-8',
@@ -462,7 +469,7 @@ export default function ArticlePage() {
                     <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-brand-600 transition-colors">
                       {a['Article Title']}
                     </h3>
-                    <div className="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-widest text-[10px] mt-auto">
+                    <div className="flex items-center gap-2 text-cyan-800 font-bold text-sm mt-auto">
                       Read Article <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -482,7 +489,7 @@ export default function ArticlePage() {
                     href={l.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-brand-600 underline underline-offset-4"
+                    className="text-cyan-800 underline underline-offset-4"
                   >
                     {l.label}
                   </a>
@@ -492,6 +499,7 @@ export default function ArticlePage() {
           </div>
         )}
       </div>
+      </FloatingPathsBackground>
 
       <Footer />
     </div>

@@ -13,6 +13,7 @@ import { TrustBadges } from '@/components/TrustBadges';
 import { Testimonials } from '@/components/Testimonials';
 import { FAQ } from '@/components/FAQ';
 import { LeadFormModal } from '@/components/LeadFormModal';
+import { FloatingPathsBackground } from '@/components/FloatingPathsBackground';
 
 const topCities = ['London', 'Manchester', 'Birmingham', 'Leeds', 'Liverpool', 'Bristol', 'Edinburgh', 'Glasgow', 'Cardiff', 'Sheffield', 'Nottingham', 'Newcastle upon Tyne'];
 
@@ -36,70 +37,56 @@ export default function HomePage() {
     <>
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Header onOpenModal={() => setIsModalOpen(true)} />
-      <main className="flex-grow">
+      <main className="flex-grow bg-slate-50">
 
         <Hero
           title="Find a Top-Rated Invisalign Dentist Near You"
           subtitle="Compare Platinum and Diamond Invisalign providers in your area. Get up to 3 free quotes from the UK's highest-rated clear aligner specialists. Our service is 100% free."
-          image="https://images.unsplash.com/photo-1694675236489-d73651370688?q=80&w=880&auto=format&fit=crop"
+          image="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?q=80&w=1800&auto=format&fit=crop"
           onOpenModal={() => setIsModalOpen(true)}
         />
 
         <TrustBadges />
 
-        {/* What Is Invisalign — 3-col: text left (2 cols), visual right (1 col) */}
-        <section className="section-padding bg-white">
+        {/* Expert intro inspired by the oral surgery reference */}
+        <FloatingPathsBackground position={1} className="bg-[#f4efeb] py-20 md:py-28">
           <div className="container-width">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-10">What Is Invisalign and How Does It Work?</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-              <div className="lg:col-span-2 prose prose-gray max-w-none text-gray-600 space-y-4">
-                <p>
-                  Invisalign is a clear aligner system that straightens teeth without metal braces. Instead of brackets and wires, you wear a series of custom-made, nearly invisible plastic trays that gradually shift your teeth into the correct position. Each set of aligners is worn for 1 to 2 weeks before moving to the next in the sequence.
-                </p>
-                <p>
-                  Treatment starts with a 3D digital scan using an iTero scanner. Your dentist then uses ClinCheck software to map every tooth movement from start to finish, producing a digital animation of your projected result before you commit. This precision planning is what separates Invisalign from cheaper direct-to-consumer alternatives that skip in-person clinical assessment.
-                </p>
-                <p>
-                  Invisalign is manufactured by Align Technology, who have treated over 14 million patients globally since 1997 with over 900 patents on their SmartTrack material and SmartForce attachment designs. It is the most clinically researched clear aligner system in the world.
-                </p>
-                <p>
-                  Not all dentists are equally experienced with Invisalign. Align Technology ranks providers into tiers based on annual case volume. A provider doing 10 cases a year will not deliver the same result as one doing 150. <strong>Our network only includes Platinum (80+ cases/year) and Diamond (150+ cases/year) providers</strong> because the clinical difference is significant.
-                </p>
+            <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="overflow-hidden rounded-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.pexels.com/photos/6502308/pexels-photo-6502308.jpeg"
+                  alt="Smiling Invisalign patient"
+                  className="aspect-[4/5] w-full object-cover"
+                  loading="lazy"
+                />
               </div>
-              <div className="space-y-4">
-                {[
-                  { tier: 'Diamond', cases: '150+ cases/year', desc: 'Treats multiple patients daily. Access to every advanced Invisalign feature.', listed: true },
-                  { tier: 'Platinum', cases: '80+ cases/year', desc: 'Handles complex cases including deep bites, severe crowding, and full arch treatment.', listed: true },
-                  { tier: 'Gold', cases: '20+ cases/year', desc: 'Limited complex case experience. Not included in our network.', listed: false },
-                ].map((item, i) => (
-                  <div key={i} className={`p-4 rounded-xl border ${item.listed ? 'bg-brand-50 border-brand-100' : 'bg-gray-50 border-gray-200 opacity-50'}`}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-gray-900 text-sm">{item.tier}</span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${item.listed ? 'bg-brand-500 text-white' : 'bg-gray-300 text-gray-600'}`}>
-                        {item.listed ? 'In Network' : 'Not Listed'}
-                      </span>
-                    </div>
-                    <div className="text-xs text-gray-500 mb-1">{item.cases}</div>
-                    <p className="text-xs text-gray-600">{item.desc}</p>
-                  </div>
-                ))}
-                <div className="bg-gray-900 text-white p-5 rounded-xl mt-2">
-                  <div className="text-sm font-bold mb-1">Why does tier matter?</div>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    Higher-tier providers have more experience, access to advanced features like Precision Wings and mandibular advancement, better refinement rates, and statistically superior outcomes. We only list the top 5% so you do not have to guess.
+              <div>
+                <h2 className="max-w-xl text-4xl font-medium leading-tight text-slate-800 md:text-6xl">
+                  Invisalign care without the guesswork.
+                </h2>
+                <div className="mt-7 max-w-2xl space-y-4 text-sm leading-7 text-slate-600 md:text-base">
+                  <p>
+                    We connect you with experienced Platinum and Diamond Invisalign providers, so you can compare trusted clinicians before committing to treatment.
+                  </p>
+                  <p>
+                    Every consultation includes clinical assessment, provider guidance, and a clear quote. You get the reassurance of expert-led care without calling clinic after clinic.
                   </p>
                 </div>
+                <button onClick={() => setIsModalOpen(true)} className="mt-8 rounded-full border border-slate-400 px-6 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-800 hover:text-white">
+                  Meet Your Provider
+                </button>
               </div>
             </div>
           </div>
-        </section>
+        </FloatingPathsBackground>
 
         {/* Why Invisalign — short intro, then cards do the heavy lifting */}
-        <section className="section-padding bg-gray-50">
+        <section className="bg-[#f6fbff] py-20 md:py-28">
           <div className="container-width">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Why Thousands of UK Adults Are Choosing Invisalign Over Braces</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="mb-4 text-4xl font-medium text-slate-800 md:text-6xl">Why Thousands of UK Adults Are Choosing Invisalign Over Braces</h2>
+              <p className="mx-auto max-w-3xl text-lg text-slate-600">
                 Demand for adult orthodontics in the UK has increased by over 80% since 2010, with Invisalign accounting for the majority of that growth. Adults are choosing clear aligners because they fit around their existing lifestyle in ways fixed braces cannot.
               </p>
             </div>
@@ -113,11 +100,11 @@ export default function HomePage() {
                 { icon: <Calendar className="w-6 h-6 text-brand-500" />, title: 'From Just 3 Months', desc: 'Express handles minor corrections in 3 to 6 months. Lite covers moderate cases in 6 to 12 months. Full Comprehensive averages 12 to 18 months. Many adults are surprised how quickly results become visible.' },
                 { icon: <Globe className="w-6 h-6 text-brand-500" />, title: 'Better Oral Hygiene', desc: 'With braces, food traps around brackets causing white spots and cavities. With Invisalign you remove trays to brush and floss normally, significantly reducing decay and gum disease risk during treatment.' },
               ].map((item, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex gap-4">
-                  <div className="w-10 h-10 bg-brand-50 rounded-lg flex items-center justify-center flex-shrink-0">{item.icon}</div>
+                <div key={i} className="group flex gap-4 border border-slate-200 bg-white p-6 transition-all hover:bg-slate-50">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#cfe4ee] text-slate-700">{item.icon}</div>
                   <div>
-                    <h3 className="font-display font-bold text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                    <h3 className="mb-2 text-lg font-medium text-slate-800">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -126,30 +113,30 @@ export default function HomePage() {
         </section>
 
         {/* Pricing — table-led, text supports */}
-        <section className="section-padding bg-white">
+        <section className="bg-[#4f6073] py-20 text-white md:py-28">
           <div className="container-width">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-3">How Much Does Invisalign Cost in the UK in 2025?</h2>
-            <p className="text-gray-600 mb-8 max-w-3xl">
+            <h2 className="mb-3 text-4xl font-medium text-white md:text-6xl">How Much Does Invisalign Cost in the UK in 2025?</h2>
+            <p className="mb-8 max-w-3xl text-white/78">
               Pricing depends on case complexity, Invisalign product type, and your provider's tier. Below are current costs from Platinum and Diamond providers. London and the South East tend toward the higher end; Midlands, North, Scotland and Wales sit lower.
             </p>
 
             <div className="overflow-x-auto mb-8">
-              <table className="w-full text-sm border border-gray-200 rounded-xl overflow-hidden">
+              <table className="w-full overflow-hidden border border-white/20 text-sm">
                 <thead>
-                  <tr className="bg-brand-50 text-left">
-                    <th className="px-5 py-3 font-bold text-gray-900">Treatment Type</th>
-                    <th className="px-5 py-3 font-bold text-gray-900">Price (GBP)</th>
-                    <th className="px-5 py-3 font-bold text-gray-900 hidden md:table-cell">Duration</th>
-                    <th className="px-5 py-3 font-bold text-gray-900 hidden lg:table-cell">Best For</th>
+                  <tr className="bg-white/10 text-left">
+                    <th className="px-5 py-3 font-bold text-white">Treatment Type</th>
+                    <th className="px-5 py-3 font-bold text-white">Price (GBP)</th>
+                    <th className="hidden px-5 py-3 font-bold text-white md:table-cell">Duration</th>
+                    <th className="hidden px-5 py-3 font-bold text-white lg:table-cell">Best For</th>
                   </tr>
                 </thead>
                 <tbody>
                   {pricingTiers.map((tier, i) => (
-                    <tr key={tier.slug} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="px-5 py-4 font-bold text-gray-900">{tier.treatment}</td>
-                      <td className="px-5 py-4"><span className="font-bold text-brand-600">£{tier.priceFrom.toLocaleString()} to £{tier.priceTo.toLocaleString()}</span></td>
-                      <td className="px-5 py-4 text-gray-700 hidden md:table-cell">{tier.typicalDuration}</td>
-                      <td className="px-5 py-4 text-gray-600 text-xs hidden lg:table-cell">{tier.description}</td>
+                    <tr key={tier.slug} className={i % 2 === 0 ? 'bg-white/[0.04]' : 'bg-white/[0.08]'}>
+                      <td className="px-5 py-4 font-bold text-white">{tier.treatment}</td>
+                      <td className="px-5 py-4"><span className="font-bold text-cyan-200">£{tier.priceFrom.toLocaleString()} to £{tier.priceTo.toLocaleString()}</span></td>
+                      <td className="hidden px-5 py-4 text-slate-200 md:table-cell">{tier.typicalDuration}</td>
+                      <td className="hidden px-5 py-4 text-xs text-slate-300 lg:table-cell">{tier.description}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -157,79 +144,84 @@ export default function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-brand-50 rounded-xl p-5 border border-brand-100">
-                <h3 className="font-bold text-gray-900 text-sm mb-3">What Is Included</h3>
+              <div className="border border-white/20 bg-white/[0.08] p-6">
+                <h3 className="mb-3 text-sm font-bold text-white">What Is Included</h3>
                 <ul className="space-y-2">
                   {treatmentIncludes.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                      <CheckCircle className="w-3.5 h-3.5 text-brand-500 flex-shrink-0 mt-0.5" />
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                      <CheckCircle className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-cyan-300" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+              <div className="border border-white/30 bg-[#cfe4ee] p-6 text-slate-950">
                 <div className="flex items-center gap-2 mb-3">
-                  <CreditCard className="w-4 h-4 text-brand-600" />
-                  <h3 className="font-bold text-gray-900 text-sm">0% Finance Available</h3>
+                  <CreditCard className="h-4 w-4 text-slate-900" />
+                  <h3 className="text-sm font-bold text-slate-950">0% Finance Available</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed mb-3">{financeInfo.description}</p>
-                <div className="bg-white rounded-lg p-3 border border-gray-100">
-                  <div className="text-xl font-display font-bold text-brand-600">From £{financeInfo.monthlyFrom}/month</div>
-                  <span className="text-xs text-gray-500">Over {financeInfo.spreadOver} at 0% APR</span>
+                <p className="mb-3 text-sm leading-relaxed text-slate-700">{financeInfo.description}</p>
+                <div className="rounded-2xl border border-slate-950/10 bg-white p-3">
+                  <div className="text-xl font-black text-slate-950">From £{financeInfo.monthlyFrom}/month</div>
+                  <span className="text-xs text-slate-500">Over {financeInfo.spreadOver} at 0% APR</span>
                 </div>
               </div>
             </div>
 
-            <p className="text-gray-600 text-sm leading-relaxed max-w-4xl">
+            <p className="max-w-4xl text-sm leading-relaxed text-white/76">
               Platinum and Diamond providers may charge slightly more than general dentists, but their experience means fewer complications, fewer refinement rounds, and better results. Most patients find the slightly higher upfront cost saves money overall through less total treatment time. Our free service lets you compare quotes from multiple top-tier providers so you can decide based on both cost and credentials.
             </p>
           </div>
         </section>
 
-        {/* Conditions / Treatments — compact intro */}
-        <section className="section-padding bg-gray-50">
+        {/* Conditions / Treatments — reference-style service panel */}
+        <section className="bg-[#cfe4ee] py-20 md:py-28">
           <div className="container-width">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Conditions Invisalign Can Treat</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+            <div className="mx-auto mb-14 max-w-2xl text-center">
+              <h2 className="mb-4 text-4xl font-medium text-slate-800 md:text-6xl">Precision-Crafted Smile Solutions</h2>
+              <p className="text-sm leading-7 text-slate-600">
                 Our Platinum providers routinely treat complex bite and alignment issues that previously required fixed braces, using advanced features like SmartForce attachments and Precision Wings. Select a condition to find specialists near you.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map(service => (
-                <article key={service.id} className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col">
-                  <Link href={`/services/${service.slug}/`} className="block h-44 overflow-hidden relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                  </Link>
-                  <div className="p-5 flex flex-col flex-grow">
+            <div className="grid overflow-hidden bg-white shadow-sm md:grid-cols-[1.05fr_1fr]">
+              <div className="min-h-[520px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/precision-crafted-smile.jpeg"
+                  alt="Clear Invisalign aligner held up to a healthy smile"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="grid sm:grid-cols-2">
+                {services.map(service => (
+                  <article key={service.id} className="group flex min-h-44 flex-col border-b border-r border-slate-200 p-6 transition hover:bg-slate-50">
                     <Link href={`/services/${service.slug}/`}>
-                      <h3 className="text-lg font-display font-bold text-gray-900 mb-1.5 group-hover:text-brand-600 transition-colors">{service.title}</h3>
+                      <h3 className="mb-3 text-xl font-medium leading-tight text-slate-800 transition-colors group-hover:text-cyan-800">{service.title}</h3>
                     </Link>
-                    <p className="text-gray-600 text-sm mb-5 line-clamp-2 flex-grow">{service.description}</p>
-                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
-                      <Link href={`/services/${service.slug}/`} className="text-brand-600 font-medium text-sm flex items-center hover:underline">
-                        Find providers <ArrowRight className="w-4 h-4 ml-1" />
-                      </Link>
-                      <button onClick={() => setIsModalOpen(true)} className="bg-gray-900 hover:bg-gray-800 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
-                        Get 3 Quotes
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
+                    <p className="mb-5 line-clamp-3 flex-grow text-sm leading-6 text-slate-600">{service.description}</p>
+                    <Link href={`/services/${service.slug}/`} className="mt-auto text-sm font-bold text-slate-500 transition group-hover:text-cyan-800">
+                      Explore treatment
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="mt-8 text-center">
+              <button onClick={() => setIsModalOpen(true)} className="rounded-full border border-slate-500 px-6 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-800 hover:text-white">
+                Explore All Services
+              </button>
             </div>
           </div>
         </section>
 
         {/* How It Works — visual steps first, text after */}
-        <section className="section-padding bg-white">
+        <FloatingPathsBackground position={-1} className="bg-white py-16 md:py-20">
           <div className="container-width">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">How Our Free Matching Service Works</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <h2 className="mb-4 text-3xl font-black text-slate-950 md:text-5xl">How Our Free Matching Service Works</h2>
+              <p className="mx-auto max-w-2xl text-slate-600">
                 We are not a dental clinic. We are a free referral service that connects you with the right Invisalign specialist. You pay nothing and there is no obligation.
               </p>
             </div>
@@ -240,46 +232,46 @@ export default function HomePage() {
                 { step: 2, title: "We Find Your Matches", desc: "We search 350+ Platinum and Diamond providers and shortlist the best fit based on case type, location, reviews, and availability." },
                 { step: 3, title: "Get Up to 3 Free Quotes", desc: "Matched providers contact you within 2 hours. Each offers a free consultation with an iTero 3D scan and personalised treatment plan." },
               ].map(item => (
-                <div key={item.step} className="text-center">
-                  <div className="w-16 h-16 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-lg">
-                    <span className="text-2xl font-display font-bold text-brand-600">{item.step}</span>
+                <div key={item.step} className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-center">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-slate-950 shadow-lg">
+                    <span className="text-2xl font-black text-cyan-200">{item.step}</span>
                   </div>
-                  <h3 className="text-lg font-display font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                  <h3 className="mb-2 text-lg font-black text-slate-950">{item.title}</h3>
+                  <p className="text-sm text-slate-600">{item.desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100">
+            <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-2xl shadow-slate-950/15 md:p-8">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <h3 className="font-display font-bold text-gray-900 text-lg mb-3">Why we built this service</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                  <h3 className="mb-3 text-lg font-black text-white">Why we built this service</h3>
+                  <p className="mb-3 text-sm leading-relaxed text-slate-300">
                     Finding a genuinely experienced Invisalign provider is harder than it should be. Any general dentist can offer Invisalign after a short training course, but the quality of your result depends heavily on case experience. Our vetting ensures you only see providers with a proven track record across hundreds of cases.
                   </p>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-slate-300">
                     Our network covers over 350 clinics across England, Scotland, Wales, and Northern Ireland. There is no catch. We earn a referral fee from the provider only if you choose to proceed with treatment, so the service is always free for you.
                   </p>
                 </div>
                 <div className="text-center">
                   <button onClick={() => setIsModalOpen(true)} className="btn-primary text-lg !px-8 !py-4">Get Your Free Quotes</button>
-                  <p className="text-xs text-gray-500 mt-2">100% free · No obligation · 60 seconds</p>
+                  <p className="mt-2 text-xs text-slate-400">100% free · No obligation · 60 seconds</p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </FloatingPathsBackground>
 
         {/* Invisalign vs Braces — side by side, compact */}
-        <section className="section-padding bg-gray-50">
+        <section className="section-padding bg-[#f6fbff]">
           <div className="container-width">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-3">Invisalign vs Braces: Which Is Better for Adults?</h2>
             <p className="text-gray-600 mb-8 max-w-3xl">
               For most adult cases, Invisalign delivers comparable or better results with significantly less disruption. The specifics depend on your case, which is why the free consultation and 3D scan is so valuable.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white rounded-2xl p-6 border border-brand-100">
-                <h3 className="font-display font-bold text-brand-600 text-lg mb-4">Invisalign Clear Aligners</h3>
+              <div className="bg-white p-6 border border-slate-200 shadow-sm">
+                <h3 className="font-display font-medium text-cyan-800 text-lg mb-4">Invisalign Clear Aligners</h3>
                 <ul className="space-y-2.5">
                   {['Virtually invisible during wear', 'Removable for eating and brushing', 'No metal brackets or wires', 'Visits every 6 to 8 weeks', 'Digital preview of final results', 'Average 6 to 18 months', 'Smooth plastic, no sharp edges', '£1,500 to £5,500'].map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
@@ -288,7 +280,7 @@ export default function HomePage() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-200">
+              <div className="bg-white p-6 border border-slate-200 shadow-sm">
                 <h3 className="font-display font-bold text-gray-400 text-lg mb-4">Traditional Metal Braces</h3>
                 <ul className="space-y-2.5">
                   {['Visible metal on teeth', 'Fixed, cannot remove', 'Strict food restrictions', 'Monthly adjustments needed', 'No result preview', 'Average 18 to 36 months', 'Can cause sores and irritation', '£1,500 to £6,000'].map((item, i) => (
@@ -320,30 +312,30 @@ export default function HomePage() {
         </section>
 
         {/* Locations — compact header */}
-        <section className="section-padding bg-gray-50">
+        <FloatingPathsBackground position={1} className="bg-[#f6fbff] py-16 md:py-20">
           <div className="container-width">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-3">Compare Invisalign Dentists in Your City</h2>
-            <p className="text-gray-600 mb-8 max-w-3xl">
+            <h2 className="mb-3 text-3xl font-black text-slate-950 md:text-5xl">Compare Invisalign Dentists in Your City</h2>
+            <p className="mb-8 max-w-3xl text-slate-600">
               Our network covers over 350 cities across England, Scotland, Wales, and Northern Ireland. Each page shows available providers, treatments, local pricing, and reviews.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {topCities.map(city => (
-                <Link key={city} href={`/location/${toSlug(city)}/`} className="group flex items-center gap-3 bg-white hover:bg-brand-50 border border-gray-100 hover:border-brand-200 rounded-xl p-4 transition-all">
-                  <div className="w-9 h-9 bg-brand-50 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <MapPin className="w-4 h-4 text-brand-500" />
+                <Link key={city} href={`/location/${toSlug(city)}/`} className="group flex items-center gap-3 rounded-3xl border border-slate-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-cyan-50 hover:shadow-lg hover:shadow-slate-950/5">
+                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-slate-950 transition-transform group-hover:scale-110">
+                    <MapPin className="h-4 w-4 text-cyan-200" />
                   </div>
                   <div>
-                    <span className="font-display font-bold text-gray-900 group-hover:text-brand-700 text-sm block">Invisalign {city}</span>
-                    <span className="text-[11px] text-gray-500">Providers and prices</span>
+                    <span className="block text-sm font-black text-slate-950 group-hover:text-cyan-900">Invisalign {city}</span>
+                    <span className="text-[11px] text-slate-500">Providers and prices</span>
                   </div>
                 </Link>
               ))}
             </div>
             <div className="text-center mt-6">
-              <Link href="/location/" className="text-brand-600 font-semibold text-sm hover:underline">View all 350+ locations →</Link>
+              <Link href="/location/" className="text-sm font-bold text-cyan-700 hover:underline">View all 350+ locations →</Link>
             </div>
           </div>
-        </section>
+        </FloatingPathsBackground>
 
         {/* FAQ — 10 questions */}
         <section className="section-padding bg-white">

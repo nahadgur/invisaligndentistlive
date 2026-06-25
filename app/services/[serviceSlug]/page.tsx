@@ -216,31 +216,36 @@ export default function ServicePage({ params }: { params: { serviceSlug: string 
       <Header onOpenModal={() => setIsModalOpen(true)} />
       <main className="flex-grow">
 
-        {/* Hero with form */}
-        <section className="bg-gray-900 text-white relative overflow-hidden">
+        {/* Full-bleed hero with form */}
+        <section className="relative isolate min-h-screen overflow-hidden bg-slate-900 text-white">
           <div className="absolute inset-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={service.image} alt="" className="w-full h-full object-cover opacity-40" loading="eager" />
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/40" />
+            <img src={service.image} alt="" className="h-full w-full object-cover object-center" loading="eager" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/88 via-slate-900/58 to-slate-900/18" />
+            <div className="absolute inset-0 opacity-[0.16] mix-blend-multiply [background-image:radial-gradient(circle_at_center,rgba(0,0,0,0.9)_0.6px,transparent_0.8px)] [background-size:4px_4px]" />
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950/50 to-transparent" />
           </div>
-          <div className="container-width py-12 md:py-20 relative z-10">
-            <Breadcrumbs items={[{ label: 'Treatments', href: '/services/' }, { label: service.title }]} />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-6">
-              <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight mb-6">
+          <div className="container-width relative z-10 flex min-h-screen items-center py-28 md:py-32">
+            <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/25 bg-slate-950/34 p-7 shadow-2xl shadow-black/25 backdrop-blur-md before:absolute before:inset-x-6 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/70 before:to-transparent after:absolute after:-right-24 after:-top-24 after:h-64 after:w-64 after:rounded-full after:bg-white/10 after:blur-3xl md:p-10">
+                <div className="relative z-10">
+                  <Breadcrumbs items={[{ label: 'Treatments', href: '/services/' }, { label: service.title }]} />
+                  <h1 className="mt-6 text-5xl font-semibold leading-[0.95] text-white drop-shadow-sm md:text-7xl">
                   {service.title}
                 </h1>
-                <p className="text-xl text-gray-300 mb-8 leading-relaxed">{service.description}</p>
-                <div className="space-y-3">
+                  <p className="mt-6 max-w-xl text-base leading-8 text-white/86 md:text-lg">{service.description}</p>
+                  <div className="mt-8 space-y-3">
                   {['Compare up to 3 free quotes', 'Platinum and Diamond providers only', `${totalCities}+ UK locations available`].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-brand-400 flex-shrink-0" />
-                      <span className="text-lg">{item}</span>
+                        <CheckCircle className="h-5 w-5 flex-shrink-0 text-cyan-200" />
+                        <span className="text-sm font-bold text-white/90">{item}</span>
                     </div>
                   ))}
+                  </div>
                 </div>
               </div>
-              <div>
+              <div className="rounded-[2rem] border border-white/20 bg-white/12 p-3 shadow-2xl shadow-black/20 backdrop-blur-md">
                 <HeroLeadForm service={service.title} />
               </div>
             </div>

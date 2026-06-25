@@ -10,6 +10,7 @@ import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/Hero';
 import { FAQ } from '@/components/FAQ';
 import { LeadFormModal } from '@/components/LeadFormModal';
+import { FloatingPathsBackground } from '@/components/FloatingPathsBackground';
 
 export default function LocationIndexPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,11 +34,11 @@ export default function LocationIndexPage() {
         <Hero
           title="Find Your Local Platinum Provider"
           subtitle="Access the UK's most exclusive network of clear aligner experts. Vetted for quality, verified for results."
-          image="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2000&auto=format&fit=crop"
+          image="/images/location-crowns-fillings.jpeg"
           onOpenModal={() => setIsModalOpen(true)}
         />
 
-        <section className="section-padding">
+        <FloatingPathsBackground position={-1} className="bg-[#f4efeb] py-20 md:py-28">
           <div className="container-width">
             {/* Search */}
             <div className="max-w-xl mx-auto mb-12">
@@ -48,7 +49,7 @@ export default function LocationIndexPage() {
                   placeholder="Search your city or town..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition"
+                  className="w-full border border-slate-200 bg-white/90 py-4 pl-12 pr-4 text-sm text-slate-900 shadow-sm backdrop-blur transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 />
               </div>
             </div>
@@ -57,17 +58,17 @@ export default function LocationIndexPage() {
             <div className="space-y-12">
               {Object.entries(filteredLocations).map(([region, cities]) => (
                 <div key={region}>
-                  <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">{region}</h2>
+                  <h2 className="mb-6 text-3xl font-medium text-slate-800">{region}</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                     {cities.map(city => (
                       <Link
                         key={city}
                         href={`/location/${toSlug(city)}/`}
-                        className="group block bg-gray-50 hover:bg-brand-50 border border-gray-100 hover:border-brand-200 rounded-xl p-4 transition-all"
+                        className="group block border border-slate-200 bg-white/88 p-4 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-white hover:shadow-lg hover:shadow-slate-950/5"
                       >
                         <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                          <span className="font-medium text-gray-700 group-hover:text-brand-700 text-sm">{city}</span>
+                          <MapPin className="w-4 h-4 text-cyan-700 flex-shrink-0" />
+                          <span className="font-medium text-slate-700 group-hover:text-cyan-800 text-sm">{city}</span>
                         </div>
                       </Link>
                     ))}
@@ -76,9 +77,9 @@ export default function LocationIndexPage() {
               ))}
             </div>
           </div>
-        </section>
+        </FloatingPathsBackground>
 
-        <section className="section-padding bg-gray-50">
+        <section className="section-padding bg-white">
           <div className="container-width max-w-3xl">
             <FAQ faqs={FAQS_LOCATION} />
           </div>

@@ -2,25 +2,25 @@ import { ShieldCheck, UserCheck, Award, PoundSterling } from 'lucide-react';
 import { trustBadges } from '@/data/site';
 
 const iconMap: Record<string, React.ReactNode> = {
-  ShieldCheck: <ShieldCheck className="w-7 h-7 text-brand-500" />,
-  UserCheck: <UserCheck className="w-7 h-7 text-brand-500" />,
-  Award: <Award className="w-7 h-7 text-brand-500" />,
-  PoundSterling: <PoundSterling className="w-7 h-7 text-brand-500" />,
+  ShieldCheck: <ShieldCheck className="h-5 w-5 text-cyan-700" />,
+  UserCheck: <UserCheck className="h-5 w-5 text-cyan-700" />,
+  Award: <Award className="h-5 w-5 text-cyan-700" />,
+  PoundSterling: <PoundSterling className="h-5 w-5 text-cyan-700" />,
 };
 
 export function TrustBadges() {
   return (
-    <section className="py-10 bg-white border-b border-gray-100">
+    <section className="border-y border-slate-200 bg-white py-8">
       <div className="container-width">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {trustBadges.map(badge => (
-            <div key={badge.title} className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <div key={badge.title} className="flex items-start gap-4 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-cyan-100">
                 {iconMap[badge.icon]}
               </div>
               <div>
-                <div className="font-semibold text-gray-900 text-sm">{badge.title}</div>
-                <div className="text-xs text-gray-500">{badge.description}</div>
+                <div className="text-sm font-black text-slate-950">{badge.title}</div>
+                <div className="mt-1 text-xs leading-relaxed text-slate-600">{badge.description}</div>
               </div>
             </div>
           ))}

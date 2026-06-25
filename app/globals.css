@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@500;600;700&display=swap');
 
 :root {
   --font-sans: 'DM Sans', system-ui, sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
 @layer base {
@@ -16,24 +16,27 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply font-sans text-gray-900 bg-white;
+    @apply font-sans text-slate-950 bg-slate-50;
   }
   h1, h2, h3 {
-    @apply font-display;
+    @apply font-display tracking-tight;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 font-bold text-white shadow-lg shadow-slate-950/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-cyan-950 hover:shadow-xl;
   }
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 px-6 rounded-xl border border-gray-200 transition-all duration-200;
+    @apply inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 font-bold text-slate-950 transition-all duration-200 hover:border-cyan-200 hover:bg-cyan-50;
   }
   .section-padding {
-    @apply py-20 md:py-24;
+    @apply py-16 md:py-20;
   }
   .container-width {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .surface-card {
+    @apply rounded-3xl border border-slate-200/80 bg-white shadow-sm shadow-slate-950/5;
   }
 }

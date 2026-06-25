@@ -28,24 +28,39 @@ export default function CityPage({ params }: { params: { city: string } }) {
       <Header onOpenModal={() => setIsModalOpen(true)} />
       <main className="flex-grow">
 
-        {/* Hero with form */}
-        <section className="bg-gray-900 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-900/30 via-gray-900/0 to-transparent pointer-events-none" />
-          <div className="container-width py-12 md:py-20 relative z-10">
-            <Breadcrumbs items={[{ label: 'Locations', href: '/location/' }, { label: cityName }]} />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-6">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-brand-500/20 text-brand-300 px-3 py-1 rounded-full text-sm font-medium mb-6 border border-brand-500/30">
-                  <MapPin className="w-4 h-4" /> Elite Platinum Providers Available
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight mb-6">
-                  Invisalign in <span className="text-brand-400">{cityName}</span>
+        {/* Full-bleed hero with form */}
+        <section className="relative isolate min-h-screen overflow-hidden bg-slate-900 text-white">
+          <div className="absolute inset-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://images.unsplash.com/photo-1694675236489-d73651370688?q=80&w=2000&auto=format&fit=crop"
+              alt=""
+              className="h-full w-full object-cover object-center"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/88 via-slate-900/58 to-slate-900/18" />
+            <div className="absolute inset-0 opacity-[0.16] mix-blend-multiply [background-image:radial-gradient(circle_at_center,rgba(0,0,0,0.9)_0.6px,transparent_0.8px)] [background-size:4px_4px]" />
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950/50 to-transparent" />
+          </div>
+          <div className="container-width relative z-10 flex min-h-screen items-center py-28 md:py-32">
+            <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_0.9fr]">
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/25 bg-slate-950/34 p-7 shadow-2xl shadow-black/25 backdrop-blur-md before:absolute before:inset-x-6 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/70 before:to-transparent after:absolute after:-right-24 after:-top-24 after:h-64 after:w-64 after:rounded-full after:bg-white/10 after:blur-3xl md:p-10">
+                <div className="relative z-10">
+                  <Breadcrumbs items={[{ label: 'Locations', href: '/location/' }, { label: cityName }]} />
+                  <h1 className="mt-6 text-5xl font-semibold leading-[0.95] text-white drop-shadow-sm md:text-7xl">
+                    Invisalign in {cityName}
                 </h1>
-                <p className="text-xl text-gray-300 leading-relaxed">
+                  <p className="mt-6 max-w-xl text-base leading-8 text-white/86 md:text-lg">
                   Access {cityName}&apos;s most experienced Invisalign specialists. Choose from our comprehensive treatment options below.
                 </p>
+                  <div className="mt-8 flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-cyan-200" />
+                    <span className="text-sm font-bold text-white/90">Platinum providers available near {cityName}</span>
+                  </div>
+                </div>
               </div>
-              <div>
+              <div className="rounded-[2rem] border border-white/20 bg-white/12 p-3 shadow-2xl shadow-black/20 backdrop-blur-md">
                 <HeroLeadForm city={cityName} />
               </div>
             </div>
