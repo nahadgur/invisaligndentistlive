@@ -74,25 +74,25 @@ export function ConsentBanner() {
       role="dialog"
       aria-labelledby="consent-banner-title"
       aria-describedby="consent-banner-desc"
-      className="fixed bottom-4 inset-x-4 z-50 mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-5 shadow-2xl sm:p-6"
+      className="fixed bottom-3 inset-x-3 z-50 mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-3.5 shadow-2xl sm:bottom-4 sm:inset-x-4 sm:p-6"
     >
-      <h2 id="consent-banner-title" className="text-base font-display font-bold text-gray-900 mb-1.5">
+      <h2 id="consent-banner-title" className="text-sm font-display font-bold text-gray-900 mb-1 sm:text-base sm:mb-1.5">
         Cookies on Invisalign Dentists
       </h2>
-      <p id="consent-banner-desc" className="text-sm text-gray-600 leading-relaxed mb-4">
+      <p id="consent-banner-desc" className="text-xs text-gray-600 leading-snug mb-2.5 sm:text-sm sm:leading-relaxed sm:mb-4">
         We use essential cookies to keep the site working. With your permission we also use analytics
         cookies to understand which content helps patients find the right provider.
       </p>
-      <div className="flex flex-wrap justify-end gap-2.5">
+      <div className="flex flex-wrap justify-end gap-2 sm:gap-2.5">
         <button
           onClick={() => setConsent('denied')}
-          className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors sm:px-4 sm:py-2 sm:text-sm"
         >
           Essential only
         </button>
         <button
           onClick={() => setConsent('granted')}
-          className="rounded-full bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 transition-colors"
+          className="rounded-full bg-brand-600 px-3.5 py-1.5 text-xs font-medium text-white hover:bg-brand-700 transition-colors sm:px-4 sm:py-2 sm:text-sm"
         >
           Accept all
         </button>

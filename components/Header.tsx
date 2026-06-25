@@ -29,17 +29,18 @@ export function Header({ onOpenModal }: HeaderProps) {
 
   return (
     <>
-      <header className={`fixed inset-x-0 z-50 pointer-events-none ${mounted ? 'transition-[top,padding] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''} ${scrolled ? 'top-4 px-3' : 'top-0 px-0'}`}>
-        <div className={`absolute inset-x-0 top-0 -z-10 h-36 bg-gradient-to-b from-black/62 via-black/24 to-transparent transition-opacity duration-500 ease-out ${scrolled ? 'opacity-0' : 'opacity-100'}`} />
+      {/* Mobile is always the floating white pill (base classes); the lg: overrides restore the
+          full-bleed dark bar on desktop until the user scrolls. Pure CSS, so no hydration flash. */}
+      <header className={`fixed inset-x-0 z-50 pointer-events-none ${mounted ? 'transition-[top,padding] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''} top-4 px-3 ${!scrolled ? 'lg:top-0 lg:px-0' : ''}`}>
+        <div className={`absolute inset-x-0 top-0 -z-10 h-36 bg-gradient-to-b from-black/62 via-black/24 to-transparent transition-opacity duration-500 ease-out opacity-0 ${!scrolled ? 'lg:opacity-100' : ''}`} />
         <div
-          className={`relative mx-auto pointer-events-auto ${mounted ? 'transition-[width] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''}`}
-          style={{ width: scrolled ? 'min(64rem, calc(100vw - 1.5rem))' : '100%' }}
+          className={`relative mx-auto pointer-events-auto w-[min(64rem,calc(100vw_-_1.5rem))] ${!scrolled ? 'lg:w-full' : ''} ${mounted ? 'transition-[width] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''}`}
         >
           <div
-            className={`relative flex items-center border ${mounted ? 'transition-[height,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''} ${
-              scrolled
-                ? 'h-16 rounded-3xl border-cyan-100 bg-white shadow-[0_18px_60px_rgba(14,165,233,0.18)] backdrop-blur-0'
-                : 'h-20 rounded-none border-x-0 border-t-0 border-cyan-200/20 bg-slate-950/34 shadow-[0_0_42px_rgba(14,165,233,0.14)] backdrop-blur-2xl'
+            className={`relative flex items-center border ${mounted ? 'transition-[height,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]' : ''} h-16 rounded-3xl border-cyan-100 bg-white shadow-[0_18px_60px_rgba(14,165,233,0.18)] backdrop-blur-0 ${
+              !scrolled
+                ? 'lg:h-20 lg:rounded-none lg:border-x-0 lg:border-t-0 lg:border-cyan-200/20 lg:bg-slate-950/35 lg:shadow-[0_0_42px_rgba(14,165,233,0.14)] lg:backdrop-blur-2xl'
+                : ''
             }`}
           >
             {/* Content rail — locked to the floating-pill width so the logo and CTA hold their
@@ -50,12 +51,12 @@ export function Header({ onOpenModal }: HeaderProps) {
             >
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className={`flex items-center justify-center overflow-hidden rounded-full border bg-white transition-all duration-300 ${scrolled ? 'h-9 w-9 border-white/80' : 'h-11 w-11 border-white/30'}`}>
+              <div className={`flex items-center justify-center overflow-hidden rounded-full border bg-white transition-all duration-300 h-9 w-9 border-white/80 ${!scrolled ? 'lg:h-11 lg:w-11 lg:border-white/30' : ''}`}>
                 <Image src="/logo.png" alt="Invisalign Dentists" width={40} height={40} priority className="object-contain" />
               </div>
               <div className="flex flex-col">
-                <span className={`font-display font-semibold leading-none transition-colors duration-300 ${scrolled ? 'text-lg text-slate-800' : 'text-2xl text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]'}`}>Invisalign Dentists</span>
-                <span className={`font-semibold transition-colors duration-300 ${scrolled ? 'text-[11px] text-slate-500' : 'text-xs text-white/82'}`}>Provider matching</span>
+                <span className={`font-display font-semibold leading-none transition-colors duration-300 text-lg text-slate-800 ${!scrolled ? 'lg:text-2xl lg:text-white lg:drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]' : ''}`}>Invisalign Dentists</span>
+                <span className={`font-semibold transition-colors duration-300 text-[11px] text-slate-500 ${!scrolled ? 'lg:text-xs lg:text-white/80' : ''}`}>Provider matching</span>
               </div>
             </Link>
 
@@ -96,7 +97,7 @@ export function Header({ onOpenModal }: HeaderProps) {
             </button>
 
             {/* Mobile Toggle */}
-            <button className={`rounded-full p-2 transition-transform duration-200 active:scale-90 lg:hidden ${scrolled ? 'text-slate-700 hover:bg-white/70' : 'text-white hover:bg-white/12'}`} onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            <button className="rounded-full p-2 text-slate-700 transition-transform duration-200 hover:bg-white/70 active:scale-90 lg:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
               <span className={`block transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileOpen ? 'rotate-90 scale-110' : 'rotate-0'}`}>
                 {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </span>
