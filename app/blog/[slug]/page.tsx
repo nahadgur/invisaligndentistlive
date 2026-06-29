@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { ChevronUp, ArrowUpRight } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import Papa from 'papaparse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -24,7 +24,6 @@ interface Article {
   'Meta Description': string;
   'Schema Markup': string;
   'Status': string;
-  'Further Reading'?: string;
 }
 
 interface ArticleWithDate extends Article {
@@ -33,11 +32,6 @@ interface ArticleWithDate extends Article {
   featuredImage?: string;
   cleanedHtml?: string;
 }
-
-type ReadingLink = {
-  url: string;
-  label: string;
-};
 
 /* =======================
    SLUG HELPERS
@@ -126,43 +120,6 @@ const ensureParagraphs = (html: string) => {
 };
 
 /* =======================
-   FURTHER READING
-======================= */
-
-const FURTHER_READING_POOL: ReadingLink[] = [
-  { url: 'https://www.invisalign.com', label: 'Invisalign (official site)' },
-  { url: 'https://pubmed.ncbi.nlm.nih.gov/?term=invisalign', label: 'PubMed: Invisalign research' },
-  { url: 'https://pubmed.ncbi.nlm.nih.gov/?term=clear+aligners', label: 'PubMed: Clear aligners research' },
-  { url: 'https://www.mouthhealthy.org/all-topics-a-z/orthodontics', label: 'MouthHealthy (ADA): Orthodontics' },
-  { url: 'https://www.nhs.uk/conditions/orthodontics/', label: 'NHS: Orthodontics' },
-  { url: 'https://www.mayoclinic.org/tests-procedures/braces/about/pac-20384670', label: 'Mayo Clinic: Braces overview' },
-  { url: 'https://www.cdc.gov/oralhealth', label: 'CDC: Oral health' },
-  { url: 'https://www.ajodo.org', label: 'AJODO (orthodontic journal)' },
-];
-
-// Simple deterministic hash so each article gets a stable, different set.
-const hashString = (s: string) => {
-  let h = 2166136261;
-  for (let i = 0; i < s.length; i++) {
-    h ^= s.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return h >>> 0;
-};
-
-const pickFurtherReading = (key: string, count: number = 3): ReadingLink[] => {
-  const pool = FURTHER_READING_POOL;
-  if (!pool.length) return [];
-  const start = hashString(key || 'post') % pool.length;
-
-  const out: ReadingLink[] = [];
-  for (let i = 0; i < pool.length && out.length < Math.min(count, pool.length); i++) {
-    out.push(pool[(start + i) % pool.length]);
-  }
-  return out;
-};
-
-/* =======================
    CTA BANNER INJECTION
 ======================= */
 
@@ -201,7 +158,7 @@ function BlogCtaBanner({ onOpenModal }: { onOpenModal: () => void }) {
     <div className="my-10 rounded-3xl overflow-hidden border border-gray-200 bg-gradient-to-r from-slate-900 to-slate-900/80 shadow-2xl relative">
       {/* Decorative accent line */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-500 via-sky-400 to-transparent" />
-      <div className="px-8 py-10 md:px-12 md:py-10 flex flex-col md:flex-row items-center gap-8">
+      <div className="px-6 py-6 md:px-10 md:py-7 flex flex-col md:flex-row items-center gap-8">
         {/* Icon */}
         <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-brand-500/15 flex items-center justify-center">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="text-brand-600">
@@ -247,8 +204,6 @@ export default function ArticlePage() {
   const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
 
   const [article, setArticle] = useState<ArticleWithDate | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<ArticleWithDate[]>([]);
-  const [furtherReading, setFurtherReading] = useState<ReadingLink[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -306,23 +261,10 @@ export default function ArticlePage() {
                 };
               });
 
-            // NOTE: We do not gate article visibility by publishDate on the article page,
-            // so "Related articles" can always render 3 internal links.
+            // NOTE: We do not gate article visibility by publishDate on the article page.
             const found = all.find((a) => a.Slug === slug) || null;
 
             setArticle(found);
-
-            if (found) {
-              setFurtherReading(pickFurtherReading(found.Slug, 3));
-
-              const sameCategory = all.filter(
-                (a) => a.Slug !== slug && a.wp_category === found.wp_category
-              );
-              const fill = all.filter(
-                (a) => a.Slug !== slug && a.wp_category !== found.wp_category
-              );
-              setRelatedArticles([...sameCategory, ...fill].slice(0, 3));
-            }
           },
         });
       });
@@ -434,70 +376,9 @@ export default function ArticlePage() {
           })()}
         </div>
 
-        {relatedArticles.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-gray-900">Related articles</h2>
-
-            <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {relatedArticles.map((a) => (
-                <Link
-                  key={a.Slug}
-                  href={`/blog/${a.Slug}`}
-                  className="group rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-brand-300 transition-all duration-500 shadow-2xl bg-white"
-                >
-                  <div className="relative h-44 overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
-                    {a.featuredImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={a.featuredImage}
-                        alt={a['Article Title']}
-                        className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl opacity-10">📝</div>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
-                    <div className="absolute top-5 left-5 px-4 py-1.5 bg-brand-500/90 backdrop-blur-md text-white text-[10px] font-bold uppercase rounded-full">
-                      {a.wp_category}
-                    </div>
-                  </div>
-
-                  <div className="p-8 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-brand-600 transition-colors">
-                      {a['Article Title']}
-                    </h3>
-                    <div className="flex items-center gap-2 text-cyan-800 font-bold text-sm mt-auto">
-                      Read Article <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {furtherReading.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-gray-900">Further Reading</h2>
-            <ul className="mt-6 space-y-3">
-              {furtherReading.map((l) => (
-                <li key={l.url}>
-                  <a
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-cyan-800 underline underline-offset-4"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="mt-10">
+          <BlogCtaBanner onOpenModal={() => setIsModalOpen(true)} />
+        </div>
       </div>
       </FloatingPathsBackground>
 
