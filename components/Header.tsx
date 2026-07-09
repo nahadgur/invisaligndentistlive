@@ -69,7 +69,7 @@ export function Header({ onOpenModal }: HeaderProps) {
                 <Link href="/services/" className={`flex items-center gap-1 rounded-full px-4 py-2 text-base font-bold transition-all duration-200 hover:-translate-y-0.5 ${scrolled ? 'text-slate-700 group-hover:bg-cyan-50 group-hover:text-cyan-800' : 'text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)] group-hover:bg-white/16 group-hover:text-cyan-100'}`}>
                   Services <ChevronDown className="w-4 h-4" />
                 </Link>
-                <div className="invisible absolute left-1/2 top-full z-50 mt-3 w-80 -translate-x-1/2 translate-y-3 rounded-[1.75rem] border border-slate-200 bg-white/96 p-3 opacity-0 shadow-2xl shadow-slate-950/16 backdrop-blur-xl transition-all duration-300 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="invisible absolute left-1/2 top-full z-50 mt-3 w-80 -translate-x-1/2 translate-y-3 rounded-[1.75rem] border border-slate-200 bg-white p-3 opacity-0 shadow-2xl shadow-slate-950/30 ring-1 ring-black/5 transition-all duration-300 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0 group-hover:opacity-100">
                   <div className="mb-2 border-b border-slate-100 px-3 pb-3">
                     <div className="font-display text-lg font-semibold text-slate-900">Treatments</div>
                     <p className="mt-1 text-xs leading-5 text-slate-500">Explore clear aligner options by smile concern.</p>
