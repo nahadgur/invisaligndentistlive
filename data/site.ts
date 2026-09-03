@@ -1,7 +1,9 @@
 export const siteConfig = {
   name: 'Invisalign Dentists',
-  domain: 'invisaligndentists.uk',
-  url: 'https://invisaligndentists.uk',
+  // The deploy serves www and redirects the apex to it, so every canonical,
+  // og:url and sitemap entry has to name www or we publish redirect URLs.
+  domain: 'www.invisaligndentists.uk',
+  url: 'https://www.invisaligndentists.uk',
   phone: '020 1234 5678',
   phoneHref: 'tel:+442012345678',
   email: 'hello@invisaligndentists.uk',
